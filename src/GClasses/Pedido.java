@@ -10,9 +10,11 @@ public class Pedido {
     public void adicionarDentroDaCaixa(String item) {
         dentroDaCaixa.add(item);
     }
+
     public void adicionarForaDaCaixa(String item) {
         foraDaCaixa.add(item);
     }
+
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Seu pedido:\n");
