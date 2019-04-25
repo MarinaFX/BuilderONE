@@ -8,11 +8,11 @@ public class ConcreteBuilder implements AbstractBuilder {
     @Override
     public void buildHamburger(String sabor) {
         if (sabor.equalsIgnoreCase("hamburger")) {
-            pedido.adicionarDentroDaCaixa(sabor);
+            pedido.adicionarDentroDaCaixa("Hamburger");
         }
 
         if (sabor.equalsIgnoreCase("cheeseburger")) {
-            pedido.adicionarDentroDaCaixa(sabor);
+            pedido.adicionarDentroDaCaixa("Cheeseburger");
         }
     }
 
@@ -53,5 +53,9 @@ public class ConcreteBuilder implements AbstractBuilder {
         if (sabor.equalsIgnoreCase("guarana")){
             pedido.adicionarForaDaCaixa("Guaraná");
         }
+    }
+
+    public Pedido getPedido(){
+        return this.pedido;
     }
 }

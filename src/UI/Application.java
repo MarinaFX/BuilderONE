@@ -6,6 +6,7 @@ import GClasses.Pedido;
 import java.util.Scanner;
 
 public class Application {
+    private static ConcreteBuilder builder = new ConcreteBuilder();
 
     private static void coletaPedido() {
         Scanner in = new Scanner(System.in);
@@ -38,29 +39,25 @@ public class Application {
         Application.atribuiSabores(escolhaHamburguer, escolhaBatata, escolhaBrinquedo, escolhaBebida);
     }
 
-    private static void atribuiSabores(String hamburg, String batata, String brinquedo, String liquido) {
-        String auxHamburg = hamburg;
-        String auxBatata = batata;
-        String auxBrinquedo = brinquedo;
-        String auxBebida = liquido;
+    private static void atribuiSabores(String hamburg, String batata, String tipoBrinquedo, String liquido) {
 
         String hamburguer = "";
         String tamanhoBatata = "";
-        String tipoBrinquedo = "";
+        String brinquedo = "";
         String bebida = "";
 
-        switch (auxHamburg) {
+        switch (hamburg) {
             case "1":
-                hamburguer = "hamburguer";
+                hamburguer = "hamburger";
                 break;
             case "2":
-                hamburguer = "cheeseburguer";
+                hamburguer = "cheeseburger";
                 break;
             default:
                 throw new IllegalArgumentException("HAMBURGUER_NÃO_CADASTRADO");
         }
 
-        switch (auxBatata) {
+        switch (batata) {
             case "1":
                 tamanhoBatata = "pequena";
                 break;
@@ -74,7 +71,7 @@ public class Application {
                 throw new IllegalArgumentException("TAMANHO_DE_BATATA_NÃO_EXISTENTE");
         }
 
-        switch (auxBrinquedo) {
+        switch (tipoBrinquedo) {
             case "1":
                 brinquedo = "carrinho";
                 break;
@@ -85,22 +82,21 @@ public class Application {
                 throw new IllegalArgumentException("BRINQUEDO_NÃO_CADASTRADO");
         }
 
-        switch (auxBebida){
+        switch (liquido){
             case "1":
                 bebida = "coca";
                 break;
             case "2":
                 bebida = "guarana";
+                break;
                 default:
                     throw new IllegalArgumentException("BEBIDA_NÃO_CADASTRADA");
         }
 
-        Application.fazPedido(hamburguer, tamanhoBatata, tipoBrinquedo, bebida);
+        Application.fazPedido(hamburguer, tamanhoBatata, brinquedo, bebida);
     }
 
     private static void fazPedido(String hamburg, String batata, String brinquedo, String liquido){
-        ConcreteBuilder builder = new ConcreteBuilder();
-
         builder.buildHamburger(hamburg);
         builder.buildBatata(batata);
         builder.buildBrinquedo(brinquedo);
@@ -108,7 +104,7 @@ public class Application {
     }
 
     private static void imprimePedido(){
-        Pedido pedido = new Pedido();
+        Pedido pedido = builder.getPedido();
 
         System.out.println(pedido.toString());
     }
